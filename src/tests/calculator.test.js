@@ -29,7 +29,30 @@ describe('Calculator basic operations', () => {
     expect(calc.calculate(10, '÷', 2)).toBe(5);
   });
 
-  test('calculate throws for unsupported operator', () => {
-    expect(() => calc.calculate(1, '%', 2)).toThrow(/unsupported operator/i);
+  test('calculate supports modulo operator %', () => {
+    expect(calc.calculate(1, '%', 2)).toBe(1);
+  });
+
+  // Extended operations
+  test('5 % 2 => 1 (modulo)', () => {
+    expect(calc.modulo(5, 2)).toBe(1);
+  });
+
+  test('2 ^ 3 => 8 (power using ^)', () => {
+    expect(calc.power(2, 3)).toBe(8);
+    expect(calc.calculate(2, '^', 3)).toBe(8);
+  });
+
+  test('2 ** 3 => 8 (power using **)', () => {
+    expect(calc.calculate(2, '**', 3)).toBe(8);
+  });
+
+  test('sqrt 16 => 4 (square root)', () => {
+    expect(calc.squareRoot(16)).toBe(4);
+    expect(calc.calculate(16, 'sqrt')).toBe(4);
+  });
+
+  test('square root of negative number throws', () => {
+    expect(() => calc.squareRoot(-1)).toThrow(/square root of negative/i);
   });
 });
